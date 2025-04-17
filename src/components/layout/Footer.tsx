@@ -2,9 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 const FooterContainer = styled.footer`
-  background-color: var(--card-color);
+  background: var(--gradient-dark);
   padding: 1.5rem 0;
   margin-top: 2rem;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
 `;
 
 const FooterContent = styled.div`
@@ -22,11 +23,17 @@ const FooterLinks = styled.div`
   display: flex;
   gap: 1.5rem;
   margin: 1rem 0;
+  
+  @media (max-width: 580px) {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
 `;
 
 const FooterLink = styled.a`
   color: var(--text-secondary);
   text-decoration: none;
+  transition: color 0.3s ease;
   
   &:hover {
     color: var(--accent-color);
@@ -42,9 +49,23 @@ const Copyright = styled.p`
 const BlockchainInfo = styled.div`
   margin-top: 0.5rem;
   font-size: 0.8rem;
-  color: var(--text-secondary);
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+  border-radius: 4px;
+  color: var(--accent-color);
 `;
 
+const SomniaLogo = styled.span`
+  background: var(--gradient-blue-purple);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+`;
+
+/**
+ * Footer Component
+ * Site footer with links and blockchain information
+ */
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
   
@@ -63,8 +84,8 @@ const Footer: React.FC = () => {
           </FooterLink>
         </FooterLinks>
         
-        <BlockchainInfo>
-          Running on the Somnia blockchain network
+        <BlockchainInfo className="animate-fade-in">
+          Running on the <SomniaLogo>Somnia</SomniaLogo> blockchain network
         </BlockchainInfo>
         
         <Copyright>
