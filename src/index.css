@@ -1,13 +1,20 @@
 :root {
-  --primary-color: #1e40af;
-  --secondary-color: #172554;
-  --accent-color: #f59e0b;
-  --background-color: #0f172a;
-  --card-color: #1e293b;
-  --text-color: #f8fafc;
-  --text-secondary: #94a3b8;
-  --error-color: #ef4444;
-  --success-color: #10b981;
+  /* Somnia color palette - blues and purples */
+  --primary-color: #3b82f6;        /* Medium blue */
+  --primary-dark: #1e40af;         /* Darker blue */
+  --secondary-color: #8b5cf6;      /* Purple */
+  --secondary-dark: #7c3aed;       /* Darker purple */
+  --accent-color: #d946ef;         /* Pink - for highlights */
+  --background-color: #0f172a;     /* Dark navy blue */
+  --card-color: #1e293b;           /* Slightly lighter blue for cards */
+  --text-color: #f8fafc;           /* Almost white */
+  --text-secondary: #94a3b8;       /* Light gray */
+  --error-color: #ef4444;          /* Red */
+  --success-color: #10b981;        /* Green */
+  
+  /* Gradient presets */
+  --gradient-blue-purple: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
 }
 
 * {
@@ -48,4 +55,29 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+/* Animation presets */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.animate-slide-in {
+  animation: slideInUp 0.5s ease-out;
 }
