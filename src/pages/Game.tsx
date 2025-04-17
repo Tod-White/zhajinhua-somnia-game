@@ -5,6 +5,7 @@ import { useWallet } from '../contexts/WalletContext';
 import { useGame, GameStatus } from '../contexts/GameContext';
 import GameTable from '../components/game/GameTable';
 import GameControls from '../components/game/GameControls';
+import LoadingSpinner from '../components/ui/LoadingSpinner';
 
 // Styled components
 const GameContainer = styled.div`
@@ -77,12 +78,7 @@ const EmptyState = styled.div`
   background-color: var(--card-color);
   border-radius: 8px;
   margin: 2rem 0;
-`;
-
-const LoadingState = styled.div`
-  text-align: center;
-  padding: 2rem;
-  color: var(--text-secondary);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 `;
 
 const ErrorState = styled.div`
@@ -92,6 +88,22 @@ const ErrorState = styled.div`
   background-color: var(--card-color);
   border-radius: 8px;
   margin: 2rem 0;
+`;
+
+const ReturnButton = styled.button`
+  background: var(--gradient-blue-purple);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-weight: bold;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  
+  &:hover {
+    opacity: 0.9;
+  }
 `;
 
 /**
@@ -227,7 +239,7 @@ const Game: React.FC = () => {
   if (isLoading) {
     return (
       <GameContainer>
-        <LoadingState>Loading game data...</LoadingState>
+        <LoadingSpinner size="large" message="Loading game data..." />
       </GameContainer>
     );
   }
@@ -238,6 +250,9 @@ const Game: React.FC = () => {
         <ErrorState>
           <h2>Error loading game</h2>
           <p>{error}</p>
+          <ReturnButton onClick={() => navigate('/lobby')}>
+            Return to Lobby
+          </ReturnButton>
         </ErrorState>
       </GameContainer>
     );
@@ -249,12 +264,9 @@ const Game: React.FC = () => {
         <EmptyState>
           <h2>Game not found</h2>
           <p>The game you're looking for doesn't exist or has been cancelled.</p>
-          <button 
-            className="bg-primary text-white px-4 py-2 rounded"
-            onClick={() => navigate('/lobby')}
-          >
+          <ReturnButton onClick={() => navigate('/lobby')}>
             Return to Lobby
-          </button>
+          </ReturnButton>
         </EmptyState>
       </GameContainer>
     );
